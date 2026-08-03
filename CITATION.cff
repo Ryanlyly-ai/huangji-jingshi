@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "如果本软件对你的研究有帮助，请引用本仓库及所使用的具体版本。"
+title: "皇极经世：元会运世算法"
+type: software
+authors:
+  - alias: Ryanlyly-ai
+repository-code: "https://github.com/Ryanlyly-ai/huangji-jingshi"
+url: "https://github.com/Ryanlyly-ai/huangji-jingshi"
+version: 0.1.0
+date-released: 2026-08-03
+license: MIT
+keywords:
+  - 皇极经世
+  - 邵雍
+  - 元会运世
+  - Chinese chronology
+abstract: >-
+  一个可审计、可测试的元会运世纪年 TypeScript 实现，区分原文明载、
+  原文可推、后世阐释与现代重构，并以历史锚点验证纪元和层级坐标。

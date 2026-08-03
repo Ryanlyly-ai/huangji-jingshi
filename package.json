@@ -1,0 +1,57 @@
+{
+  "name": "huangji-jingshi",
+  "version": "0.1.0",
+  "description": "《皇极经世》元会运世纪年核心算法与可审计的来源说明",
+  "type": "module",
+  "license": "MIT",
+  "author": "Ryanlyly-ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ryanlyly-ai/huangji-jingshi.git"
+  },
+  "homepage": "https://github.com/Ryanlyly-ai/huangji-jingshi#readme",
+  "bugs": {
+    "url": "https://github.com/Ryanlyly-ai/huangji-jingshi/issues"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "huangji": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build --silent && node --experimental-strip-types --test tests/*.test.ts",
+    "check": "npm test",
+    "calculate": "npm run build --silent && node dist/cli.js",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "皇极经世",
+    "邵雍",
+    "元会运世",
+    "Chinese chronology"
+  ],
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

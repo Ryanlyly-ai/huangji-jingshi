@@ -1,0 +1,42 @@
+name: 程序问题
+description: 报告计算、解析、类型或命令行问题
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题说明
+      description: 发生了什么？你预期得到什么？
+    validations:
+      required: true
+
+  - type: input
+    id: input
+    attributes:
+      label: 输入年份
+      placeholder: 例如：公元前87年
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: 实际输出或错误信息
+      render: text
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本与运行环境
+      placeholder: 例如：0.1.0 / Node.js 24 / macOS
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我确认输入的历史纪年中没有“公元0年”
+          required: true

@@ -1,0 +1,49 @@
+name: 文献校勘或规则讨论
+description: 提交版本异文、原书页码、算法推导或配卦规则旁证
+title: "[校勘] "
+labels: [research]
+body:
+  - type: dropdown
+    id: evidence-level
+    attributes:
+      label: 建议证据层级
+      options:
+        - 原文明载
+        - 原文可推
+        - 后世阐释
+        - 现代重构
+        - 尚不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: claim
+    attributes:
+      label: 待讨论的规则或异文
+      description: 请把结论和推导分开写。
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 来源定位
+      description: 请提供作者、书名、版本、卷次、页码；必要引文保持简短。
+    validations:
+      required: true
+
+  - type: textarea
+    id: derivation
+    attributes:
+      label: 推导或对校过程
+      description: 如果涉及数字，请写出可独立复算的步骤。
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: copyright
+    attributes:
+      label: 版权确认
+      options:
+        - label: 我没有上传仍受版权保护的整本 PDF 或大段现代整理文本
+          required: true

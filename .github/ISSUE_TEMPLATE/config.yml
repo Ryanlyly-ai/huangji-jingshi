@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全问题
+    url: https://github.com/Ryanlyly-ai/huangji-jingshi/security/advisories/new
+    about: 请不要公开披露可能影响用户或发布流程的安全问题
