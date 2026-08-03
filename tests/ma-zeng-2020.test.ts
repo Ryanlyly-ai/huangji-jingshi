@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   calculateMaZeng2020Allocation,
   formatMaZeng2020Summary,
+  MA_ZENG_HUI_CODES,
   fromAstronomicalYear,
   MA_ZENG_ON_DUTY_CODES,
   ON_DUTY_CLOCKWISE_CODES,
@@ -41,6 +42,21 @@ test("第一元首年与配表第一行一致", () => {
   assert.equal(result.positions.yearWithinYuan, 1);
   assert.equal(result.hexagrams.annual.name, "复");
   assert.equal(result.adjustments.jiaziStartSkippedPrincipal, false);
+});
+
+test("十二会采用十二消息卦，而不是各会 2160 年值卦的首卦", () => {
+  assert.deepEqual(
+    MA_ZENG_HUI_CODES,
+    [32, 48, 56, 60, 62, 63, 31, 15, 7, 3, 1, 0],
+  );
+
+  for (let hui = 1; hui <= 12; hui += 1) {
+    const ordinal = (hui - 1) * 10_800 + 1;
+    const astronomicalYear = 1 - 67_017 + ordinal - 1;
+    const input = fromAstronomicalYear(astronomicalYear);
+    const result = calculateMaZeng2020Allocation(input);
+    assert.equal(result.hexagrams.hui.fuxiCode, MA_ZENG_HUI_CODES[hui - 1]);
+  }
 });
 
 test("2019 与 2026 年年度值卦复现论文和配表", () => {
@@ -107,4 +123,15 @@ test("配卦摘要明确显示现代重构，并输出 2026 同人卦", () => {
   );
   assert.match(summary, /现代重构，可选/);
   assert.match(summary, /年度值卦：䷌同人（伏羲数 47，文王序 13）/);
+});
+
+test("遇四正子变卦时，摘要分别显示原始世卦与年度起卦", () => {
+  const result = calculateMaZeng2020Allocation({ era: "BCE", year: 64_557 });
+  assert.equal(result.hexagrams.rawJiazi60.fuxiCode, 0);
+  assert.equal(result.hexagrams.jiazi60.fuxiCode, 32);
+  assert.equal(result.adjustments.jiaziStartSkippedPrincipal, true);
+
+  const summary = formatMaZeng2020Summary(result);
+  assert.match(summary, /60 年世卦（子变卦）：䷁坤/);
+  assert.match(summary, /年度序列起卦（跳过四正）：䷗复/);
 });

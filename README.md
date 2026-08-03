@@ -16,7 +16,7 @@
 | 年干支 | 稳定 | 以本元首年甲子连续推算 |
 | 六十四卦基础数据 | 已实现 | 伏羲卦数、文王序、卦名、卦符及逐爻反转已有测试 |
 | 六十卦与三百六十爻 | 已完成第一轮校勘 | 四正卦、六十值卦与方向选择已有证据矩阵 |
-| 完整年度配卦 | 可选方案 | `ma-zeng-2020` 可复现 129600 年表，固定标注现代重构 |
+| 完整年度配卦 | 已完成全表审计的可选方案 | `ma-zeng-2020` 与原表 129600 行 × 16 列零差异，固定标注现代重构 |
 | 浏览器计算器/API | 规划中 | 将复用本仓库同一核心 |
 
 ## 已实现
@@ -31,6 +31,8 @@
 - 六十四卦的伏羲二进制编码、文王序、卦名和 Unicode 卦符；
 - 先天圆图顺时针六十值卦及逐爻反转工具；
 - 马振国、曾华才 2020 年度配卦方案，含 2019 无妄、2026 同人等回归测试。
+- 129600 行 CSV 生成器及源 PDF 逐字段审计器；
+- 129600 行 × 16 列全表比对，差异为 0。
 
 ## 快速使用
 
@@ -43,6 +45,7 @@ npm run calculate -- -87
 npm run calculate -- --json 2026
 npm run calculate -- --scheme ma-zeng-2020 2026
 npm run calculate -- --scheme ma-zeng-2020 --json 2026
+npm run generate:table -- --output /tmp/huangji-ma-zeng-2020.csv
 npm test
 npm run build
 ```
@@ -101,6 +104,7 @@ const hanWudi54 = calculateFromSignedYear(-87);
 - [卦序与方向](docs/direction-and-order.md)
 - [六十卦与年度配卦证据矩阵](docs/hexagram-evidence-matrix.md)
 - [`ma-zeng-2020` 方案规范](docs/schemes/ma-zeng-2020.md)
+- [129600 年全表审计报告](docs/audits/ma-zeng-2020-full-table.md)
 - [异文与勘误](docs/textual-variants.md)
 - [贡献与校勘办法](CONTRIBUTING.md)
 
@@ -115,8 +119,8 @@ const hanWudi54 = calculateFromSignedYear(-87);
 1. 核心纪年规范与锚点测试（已完成第一版）；
 2. 六十卦、三百六十爻和圆图方向的第一轮校勘（已完成）；
 3. `ma-zeng-2020` 可选年度配卦方案（已完成第一版）；
-4. 生成 129600 年全表并进行逐行差异审计；
-5. 浏览器计算器与公开 API。
+4. 生成 129600 年全表并进行逐行差异审计（已完成，零差异）；
+5. 浏览器计算器与公开 API（下一阶段）。
 
 版本变化见 [CHANGELOG.md](CHANGELOG.md)。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告。
 

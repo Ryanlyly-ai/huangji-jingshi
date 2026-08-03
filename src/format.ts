@@ -33,7 +33,10 @@ export function formatMaZeng2020Summary(
     hexagram("节卦", result.hexagrams.term),
     hexagram("2160 年值卦", result.hexagrams.onDuty2160),
     hexagram("360 年运卦", result.hexagrams.yun360),
-    hexagram("60 年甲子卦", result.hexagrams.jiazi60),
+    hexagram("60 年世卦（子变卦）", result.hexagrams.rawJiazi60),
+    ...(result.adjustments.jiaziStartSkippedPrincipal
+      ? [hexagram("年度序列起卦（跳过四正）", result.hexagrams.jiazi60)]
+      : []),
     hexagram("年度值卦", result.hexagrams.annual),
   ].join("\n");
 }

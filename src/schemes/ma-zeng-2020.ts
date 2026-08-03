@@ -30,6 +30,11 @@ const YEARS_PER_JIAZI_HEXAGRAM = 60;
 
 const SEASON_PRINCIPAL_CODES = Object.freeze([45, 63, 18, 0] as const);
 
+/** 十二消息卦，对应总表十二会的会卦。 */
+export const MA_ZENG_HUI_CODES = Object.freeze([
+  32, 48, 56, 60, 62, 63, 31, 15, 7, 3, 1, 0,
+] as const);
+
 function mod(value: number, divisor: number): number {
   return ((value % divisor) + divisor) % divisor;
 }
@@ -80,7 +85,9 @@ export interface MaZeng2020AllocationResult {
     term: Hexagram;
     onDuty2160: Hexagram;
     yun360: Hexagram;
+    /** 变爻所得原值，对应总表 Shi Hex；可能为四正卦。 */
     rawJiazi60: Hexagram;
+    /** 年度序列起卦；原值为四正卦时已经顺时针跳过。 */
     jiazi60: Hexagram;
     annual: Hexagram;
   };
@@ -121,7 +128,7 @@ export function calculateMaZeng2020Allocation(
   );
 
   const huiZeroBased = Math.floor(yearZeroBasedInYuan / YEARS_PER_HUI);
-  const huiHexagramCode = MA_ZENG_ON_DUTY_CODES[huiZeroBased * 5];
+  const huiHexagramCode = MA_ZENG_HUI_CODES[huiZeroBased];
   if (huiHexagramCode === undefined) {
     throw new RangeError("会卦计算失败");
   }

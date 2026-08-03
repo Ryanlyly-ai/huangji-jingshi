@@ -17,6 +17,8 @@
   "files": [
     "dist",
     "src",
+    "scripts",
+    "docs",
     "README.md",
     "LICENSE"
   ],
@@ -36,6 +38,8 @@
     "test": "npm run build --silent && node --experimental-strip-types --test tests/*.test.ts",
     "check": "npm test",
     "calculate": "npm run build --silent && node dist/cli.js",
+    "generate:table": "npm run build --silent && node scripts/generate-ma-zeng-table.mjs",
+    "audit:ma-zeng": "npm run build --silent && node scripts/audit-ma-zeng-pdf.mjs",
     "prepack": "npm run build"
   },
   "keywords": [
