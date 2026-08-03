@@ -6,7 +6,7 @@
 
 一个可审计、可测试、零运行时依赖的 TypeScript 实现。用户输入任意非零历史年份，即可得到该年所处的元、会、运、世及年干支。
 
-当前稳定范围是纪年骨架。完整值年卦体系仍在校勘，不会把后世解释或现代配表伪装成邵雍原文。
+默认稳定范围是纪年骨架。仓库另提供具名、显式启用的 `ma-zeng-2020` 年度配卦方案，并始终把它标为现代重构，不会伪装成邵雍原文或唯一算法。
 
 ## 项目状态
 
@@ -14,8 +14,9 @@
 |---|---|---|
 | 元会运世纪年 | 稳定 | 已有原书锚点、边界与不变量测试 |
 | 年干支 | 稳定 | 以本元首年甲子连续推算 |
-| 六十卦与三百六十爻 | 校勘中 | 原文规则与图序方向正在分层核对 |
-| 完整年度配卦 | 尚未发布 | 不采用未经标注的现代重构作为默认答案 |
+| 六十四卦基础数据 | 已实现 | 伏羲卦数、文王序、卦名、卦符及逐爻反转已有测试 |
+| 六十卦与三百六十爻 | 已完成第一轮校勘 | 四正卦、六十值卦与方向选择已有证据矩阵 |
+| 完整年度配卦 | 可选方案 | `ma-zeng-2020` 可复现 129600 年表，固定标注现代重构 |
 | 浏览器计算器/API | 规划中 | 将复用本仓库同一核心 |
 
 ## 已实现
@@ -27,6 +28,9 @@
 - 甲子、甲午交替世首和逐年六十甲子；
 - 公元前 2357、前 87、公元 544、959 等原书历史锚点；
 - 核心规则证据 ID 与来源等级。
+- 六十四卦的伏羲二进制编码、文王序、卦名和 Unicode 卦符；
+- 先天圆图顺时针六十值卦及逐爻反转工具；
+- 马振国、曾华才 2020 年度配卦方案，含 2019 无妄、2026 同人等回归测试。
 
 ## 快速使用
 
@@ -37,6 +41,8 @@ npm install
 npm run calculate -- 2026
 npm run calculate -- -87
 npm run calculate -- --json 2026
+npm run calculate -- --scheme ma-zeng-2020 2026
+npm run calculate -- --scheme ma-zeng-2020 --json 2026
 npm test
 npm run build
 ```
@@ -66,6 +72,17 @@ console.log(result.shi);            // 第 2302 世，酉世，第 13 年
 console.log(result.sexagenaryYear.name); // 丙午
 ```
 
+年度配卦必须显式选择方案：
+
+```ts
+import { calculateMaZeng2020Allocation } from "huangji-jingshi";
+
+const allocation = calculateMaZeng2020Allocation({ era: "CE", year: 2026 });
+console.log(allocation.scheme.evidenceLevel);       // MODERN_RECONSTRUCTION
+console.log(allocation.hexagrams.annual.name);     // 同人
+console.log(allocation.hexagrams.annual.fuxiCode); // 47
+```
+
 负整数在便捷 API 和命令行中表示公元前：
 
 ```ts
@@ -82,6 +99,8 @@ const hanWudi54 = calculateFromSignedYear(-87);
 - [历史锚点](docs/chronology-anchors.md)
 - [来源与证据层级](docs/source-provenance.md)
 - [卦序与方向](docs/direction-and-order.md)
+- [六十卦与年度配卦证据矩阵](docs/hexagram-evidence-matrix.md)
+- [`ma-zeng-2020` 方案规范](docs/schemes/ma-zeng-2020.md)
 - [异文与勘误](docs/textual-variants.md)
 - [贡献与校勘办法](CONTRIBUTING.md)
 
@@ -94,10 +113,10 @@ const hanWudi54 = calculateFromSignedYear(-87);
 ## 路线
 
 1. 核心纪年规范与锚点测试（已完成第一版）；
-2. 六十卦、三百六十爻和圆图方向的逐条校勘；
-3. 以可选方案实现完整年度配卦；
-4. 浏览器计算器与公开 API；
-5. 生成 129600 年全表并与独立资料交叉验证。
+2. 六十卦、三百六十爻和圆图方向的第一轮校勘（已完成）；
+3. `ma-zeng-2020` 可选年度配卦方案（已完成第一版）；
+4. 生成 129600 年全表并进行逐行差异审计；
+5. 浏览器计算器与公开 API。
 
 版本变化见 [CHANGELOG.md](CHANGELOG.md)。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告。
 

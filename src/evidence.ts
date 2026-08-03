@@ -29,6 +29,30 @@ export const EVIDENCE_REGISTRY: Readonly<Record<string, EvidenceItem>> = {
     title: "元会运世干支标签",
     note: "由原书连续标题及尧时坐标归纳：元、运循十干，会、世循十二支。",
   },
+  "sixty-hexagrams-360-lines": {
+    id: "sixty-hexagrams-360-lines",
+    level: "PRIMARY_EXPLICIT",
+    title: "六十四卦用止六十，合三百六十爻",
+    note: "传世本《观物外篇》明载六十四卦用止六十，六十卦合三百六十爻。",
+  },
+  "four-principal-hexagrams": {
+    id: "four-principal-hexagrams",
+    level: "PRIMARY_EXPLICIT",
+    title: "乾坤坎离为四正",
+    note: "传世本《观物外篇》明载四正为乾、坤、坎、离，并说明四卦不用而成三百六十之用。",
+  },
+  "qiao-2007-annual-sequence": {
+    id: "qiao-2007-annual-sequence",
+    level: "MODERN_RECONSTRUCTION",
+    title: "乔宗方 2007 年年度值卦解释",
+    note: "论文以 1984 年鼎卦为起点，沿先天圆图顺时针排列 1984 至 2043 年年度值卦。",
+  },
+  "ma-zeng-2020-allocation": {
+    id: "ma-zeng-2020-allocation",
+    level: "MODERN_RECONSTRUCTION",
+    title: "马振国、曾华才 2020 年 129600 年配卦方案",
+    note: "以伏羲二进制卦数、变爻层级及排除四正卦规则生成元内逐年配卦表。",
+  },
 } as const;
 
 export const CORE_EVIDENCE_IDS = [
